@@ -1,7 +1,6 @@
 import { Routes, Route, BrowserRouter, Navigate, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import CryptoJS from "crypto-js";
-import "./App.css";
 import PacAvaliacao from "./components/PacAvaliacao";
 import FormLogin from "./components/Login/Login";
 
