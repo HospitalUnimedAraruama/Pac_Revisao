@@ -11,8 +11,7 @@ function FormLogin() {
   const [error, setError] = useState('');
 
   const users = [
-    { username: 'recepcao', password: 'recAdul*$' },
-    { username: 'admin', password: 'admin123' }
+    { username: 'recepcao', password: 'recAdul*$' }
   ];
 
   const [cpf, setCpf] = useState('');

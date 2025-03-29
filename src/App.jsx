@@ -14,9 +14,20 @@ const isAuthenticated = () => {
     const bytes = CryptoJS.AES.decrypt(encryptedToken, "chave-secreta");
     const decryptedToken = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
 
-    const currentTime = Math.floor(Date.now() / 1000);
-    const timeLeft = decryptedToken.exp - currentTime;
+    if (!decryptedToken || typeof decryptedToken !== "object") return false;
 
+    const currentTime = Math.floor(Date.now() / 1000);
+
+    if (!decryptedToken.exp) {
+      decryptedToken.exp = currentTime + 30 * 60;
+      const updatedToken = CryptoJS.AES.encrypt(
+        JSON.stringify(decryptedToken),
+        "chave-secreta"
+      ).toString();
+      localStorage.setItem("user", updatedToken);
+    }
+
+    const timeLeft = decryptedToken.exp - currentTime;
 
     if (timeLeft <= 0) {
       localStorage.removeItem("user");
@@ -25,9 +36,11 @@ const isAuthenticated = () => {
 
     return true;
   } catch (e) {
+    console.error("Erro ao verificar o token:", e);
     return false;
   }
 };
+
 
 const ProtectedRoute = ({ element }) => {
   return isAuthenticated() ? element : <Navigate to="/" />;
@@ -50,10 +63,9 @@ const AuthWatcher = () => {
         localStorage.removeItem("user");
         navigate("/"); 
       }
-    }, 60000); 
-
+    }, 360); 
     return () => clearInterval(interval);
-  }, [navigate]);
+  }, []);
 
   return null; 
 };
