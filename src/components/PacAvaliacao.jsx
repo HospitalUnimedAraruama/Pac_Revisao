@@ -22,7 +22,7 @@ function PacAvaliacao() {
 
   useEffect(() => {
     async function listaPaciente() {
-      const pacRevisao = await fetch("http://localhost:3001/api/data");
+      const pacRevisao = await fetch("http://localhost:3000/api/data");
       const data = await pacRevisao.json();
       setPacientes(data);
     }

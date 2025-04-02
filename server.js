@@ -6,7 +6,7 @@ import cors from 'cors';
 dotenv.config();
 
 const app = express();
-const PORT = 3001;
+const PORT = 3000;
 const data = new Date()
 
 app.use(cors()); // Permite o React acessar o backend
@@ -16,7 +16,7 @@ oracledb.initOracleClient({ libDir: 'C:\\oracle_vsc\\product\\bin' });
 
 async function connectDatabase() {
   try {
-    const connection = await oracledb.getConnection({ user: "dbazinho", password: "borrachinha,290", connectionString: "10.118.2.42/prdmv" });
+    const connection = await oracledb.getConnection({ user: "dbazinho", password: "borrachinha,290", connectionString: "10.118.2.42/trnmv" });
     return connection;
   } catch (err) {
     console.error('Erro ao conectar:', err);

@@ -35,7 +35,7 @@ function Pagination({ data }) {
     fecharModal(); // Fecha o modal antes de atualizar
 
     try {
-      const response = await fetch('http://localhost:3001/api/update-status', {
+      const response = await fetch('http://localhost:3000/api/update-status', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ atendimento, status: 'REAVALIACAO' })

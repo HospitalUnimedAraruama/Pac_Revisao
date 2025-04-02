@@ -44,7 +44,7 @@ function FormLogin() {
     <div className={Style.container}>
       <Form className={Style.formContainer} onSubmit={submitUser}>
         <Form.Group className={Style.formGroup}>
-          <Form.Label className={Style.labelFormLogin}>CPF do usuário</Form.Label>
+          <Form.Label className={Style.labelFormLogin}>Usuário</Form.Label>
           <input
             type="text"
             className={Style.inputFormLogin}
