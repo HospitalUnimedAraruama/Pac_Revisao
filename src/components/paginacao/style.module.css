@@ -94,6 +94,46 @@
     background: #4f83b4;
 }
 
+.checkLaudo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: capitalize;
+    cursor: pointer;
+    /* background: #fff; */
+    padding: 10px;
+    /* border-radius: 3px; */
+    /* box-shadow: 0px 0px 5px 1px #dddddd; */
+
+    font-weight: 500;
+
+    /* border: 1px solid red; */
+}
+.checkLaudo span{
+    /* border: 1px solid red; */
+    /* margin-top: -3px; */
+}
+
+.laudo{
+    border-radius: 5px;
+    padding: 5px;
+    color: #fff;
+    border: 1px solid #DCDCDC;
+
+    background: none;
+}
+.laudoCkeckd{
+    /* display: inline; */
+    /* width: 10px; */
+    /* height: 10px; */
+    border-radius: 5px;
+    padding: 5px;
+    color: #fff;
+    /* border: 1px solid #DCDCDC; */
+
+    /* background: #5db109; */
+}
+
 
 
 /* modal */
@@ -140,4 +180,5 @@
     border: none;
     cursor: pointer;
   }
+  
   

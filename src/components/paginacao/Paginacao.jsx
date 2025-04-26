@@ -4,6 +4,8 @@ import Style from './style.module.css';
 function Pagination({ data }) {
   const [atendimento, setAtendimento] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [laudosMarcados, setLaudosMarcados] = React.useState([]);
+
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
@@ -29,6 +31,32 @@ function Pagination({ data }) {
     setShowModal(false);
     setAtendimento(null);
   };
+
+  function HandleLaudo(e) {
+    const { checked, value } = e.target;
+    const id = Number(value);
+    if (checked) {
+      setLaudosMarcados((prev) => {
+        const novosLaudos = [...prev, id];
+        localStorage.setItem('laudos', JSON.stringify(novosLaudos));
+        return novosLaudos;
+      });
+    } else {
+      setLaudosMarcados((prev) => {
+        const novosLaudos = prev.filter((item) => item !== id);
+        localStorage.setItem('laudos', JSON.stringify(novosLaudos));
+        return novosLaudos;
+      });
+    }
+  }
+
+  React.useEffect(() => {
+    const saved = JSON.parse(localStorage.getItem('laudos')) || [];
+    setLaudosMarcados(saved);
+  }, []);
+  
+  
+  
 
   // Confirmação e atualização do status
   const confirmarAtualizacao = async () => {
@@ -79,10 +107,22 @@ function Pagination({ data }) {
               >
                 {atendimento[1]}
               </span>
+                
+              {laudosMarcados.includes(atendimento[0]) 
+                ? <div className={Style.laudoCkeckd}>📑</div> 
+                : ''
+              }
+
+
               <span>{atendimento[2]}</span>
               <button onClick={() => abrirModal(atendimento[0])} className={Style.btn}>
                 Reavaliação
               </button>
+
+              <label htmlFor={`laudo-${atendimento[0]}`} className={Style.checkLaudo}>
+                <input type="checkbox" name={`laudo-${atendimento[0]}`} id={`laudo-${atendimento[0]}`} checked={laudosMarcados.includes(atendimento[0]) ? true : false}  value={atendimento[0]} onChange={HandleLaudo} />
+                <span>Laudo</span>
+              </label>
             </li>
           ))}
         </ul>
