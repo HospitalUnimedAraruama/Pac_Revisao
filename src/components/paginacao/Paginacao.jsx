@@ -13,7 +13,7 @@ console.log();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
   const totalPages = Math.ceil(data.length / itemsPerPage);
-  const paginateData = data.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+  const paginateData = data?.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   const previousPage = () => {
     if (currentPage > 1) setCurrentPage(prev => prev - 1);

@@ -8,7 +8,7 @@ function PacAvaliacao() {
 
  const [recepcao, setRecepcao] = React.useState(() => {
       const valorSalvo = Number(window.localStorage.getItem('recepcao'));
-      return valorSalvo ? valorSalvo : 0; // ou outro valor padrão como 1
+      return valorSalvo ? valorSalvo : 1; // ou outro valor padrão como 1
   });
 
 
