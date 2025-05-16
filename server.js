@@ -16,7 +16,7 @@ oracledb.initOracleClient({ libDir: 'C:\\oracle_vsc\\product\\bin' });
 
 async function connectDatabase() {
   try {
-    const connection = await oracledb.getConnection({ user: "dbazinho", password: "borrachinha,290", connectionString: "10.118.2.42/trnmv" });
+    const connection = await oracledb.getConnection({ user: "dbazinho", password: "borrachinha,290", connectionString: "10.118.2.42/prdmv" });
     return connection;
   } catch (err) {
     console.error('Erro ao conectar:', err);
@@ -30,6 +30,9 @@ console.log(formattedDate);
 
 
 app.get('/api/data', async (req, res) => {
+
+  const recepcao = Number(req.query.recepcao)
+  
   const connection = await connectDatabase();
   if (!connection) {
     return res.status(500).json({ error: 'Erro ao conectar ao banco de dados' });
@@ -48,7 +51,7 @@ app.get('/api/data', async (req, res) => {
       WHERE
           TR.CD_ATENDIMENTO = ATENDIME.CD_ATENDIMENTO
       AND ATENDIME.CD_MULTI_EMPRESA = 1
-      AND ATENDIME.CD_ORI_ATE IN (1)
+      AND ATENDIME.CD_ORI_ATE IN (${recepcao})
       AND ATENDIME.DT_ALTA IS NULL
       AND TR.TP_RASTREAMENTO = 'AGUARDANDO'
       AND TRUNC(ATENDIME.DT_ATENDIMENTO) = TO_DATE(:data, 'DD/MM/YYYY')

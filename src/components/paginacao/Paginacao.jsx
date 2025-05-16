@@ -5,6 +5,9 @@ function Pagination({ data }) {
   const [atendimento, setAtendimento] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [laudosMarcados, setLaudosMarcados] = React.useState([]);
+  
+
+console.log();
 
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -63,7 +66,7 @@ function Pagination({ data }) {
     fecharModal(); // Fecha o modal antes de atualizar
 
     try {
-      const response = await fetch('http://localhost:3000/api/update-status', {
+      const response = await fetch('https://reavaliacaopaciente.araruama.unimed.com.br/api/update-status', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ atendimento, status: 'REAVALIACAO' })
@@ -83,9 +86,18 @@ function Pagination({ data }) {
       alert("Erro na requisição!");
     }
   };
+  
+  // React.useEffect(()=>{
+  //     const valueStorage = +window.localStorage.getItem('recepcao');
+  //     setRecepcao(valueStorage)
+  // },[])
 
+  
+
+  
   return (
     <div className={Style.continerPagination}>
+      
       {paginateData.length ? (
         <ul className={Style.listaAtentimento}>
           {paginateData.map((atendimento, index) => (
